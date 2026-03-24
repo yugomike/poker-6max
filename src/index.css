@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  /* Poker-themed color palette */
+  --color-felt: #0d4d2b;
+  --color-felt-dark: #0a3d22;
+  --color-card: #ffffff;
+  --color-card-back: #1a365d;
+
+  /* Suit colors */
+  --color-hearts: #dc2626;
+  --color-diamonds: #2563eb;
+  --color-clubs: #16a34a;
+  --color-spades: #1f2937;
+
+  /* Range grid colors */
+  --color-range-selected: #22c55e;
+  --color-range-partial: #84cc16;
+  --color-range-empty: #374151;
+}
+
+/* Dark mode by default for poker players */
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-gray-900 text-gray-100 min-h-screen;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Touch-friendly tap targets */
+button, a, input, select {
+  min-height: 44px;
+  min-width: 44px;
+}
