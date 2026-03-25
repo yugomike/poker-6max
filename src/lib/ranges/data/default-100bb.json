@@ -4,7 +4,7 @@
     "description": "Standard GTO ranges for 100bb 6-max cash games",
     "stackDepth": 100,
     "source": "Based on Upswing, RYE charts",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "rfi": {
     "UTG": "AA,KK,QQ,JJ,TT,99,88,77,66,AKs,AQs,AJs,ATs,A5s,A4s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,AKo,AQo,AJo,KQo",
@@ -47,5 +47,72 @@
     "BB_CO": "AA,KK,QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A5s,A4s,KQs,KJs,AKo,AQo,AJo",
     "BB_BTN": "AA,KK,QQ,JJ,TT,99,88,77,AKs,AQs,AJs,ATs,A9s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,AKo,AQo,AJo,ATo,A9o",
     "BB_SB": "AA,KK,QQ,JJ,TT,99,88,77,66,AKs,AQs,AJs,ATs,A9s,A8s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,K9s,QJs,QTs,Q9s,JTs,J9s,T9s,T8s,98s,97s,87s,86s,76s,75s,65s,64s,54s,AKo,AQo,AJo,ATo,A9o,A8o,KQo,KJo"
+  },
+  "callVs3Bet": {
+    "UTG_HJ": "QQ,JJ,TT,AKs,AQs,AJs,ATs,KQs,AKo",
+    "UTG_CO": "QQ,JJ,TT,AKs,AQs,AJs,ATs,KQs,AKo",
+    "UTG_BTN": "QQ,JJ,TT,AKs,AQs,AJs,ATs,KQs,AKo",
+    "UTG_SB": "QQ,JJ,TT,AKs,AQs,AJs,ATs,KQs,AKo",
+    "UTG_BB": "QQ,JJ,TT,AKs,AQs,AJs,ATs,KQs,AKo",
+    "HJ_CO": "QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,KQs,KJs,AKo,AQo",
+    "HJ_BTN": "QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,KQs,KJs,AKo,AQo",
+    "HJ_SB": "QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,KQs,KJs,AKo,AQo",
+    "HJ_BB": "QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,KQs,KJs,AKo,AQo",
+    "CO_BTN": "QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A5s,A4s,KQs,KJs,QJs,AKo,AQo",
+    "CO_SB": "QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A5s,A4s,KQs,KJs,QJs,AKo,AQo",
+    "CO_BB": "QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A5s,A4s,KQs,KJs,QJs,AKo,AQo",
+    "BTN_SB": "QQ,JJ,TT,99,88,77,AKs,AQs,AJs,ATs,A9s,A5s,A4s,KQs,KJs,KTs,QJs,JTs,AKo,AQo,AJo",
+    "BTN_BB": "QQ,JJ,TT,99,88,77,AKs,AQs,AJs,ATs,A9s,A5s,A4s,KQs,KJs,KTs,QJs,JTs,AKo,AQo,AJo",
+    "SB_BB": "QQ,JJ,TT,99,88,77,66,AKs,AQs,AJs,ATs,A9s,A8s,A5s,A4s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,AKo,AQo,AJo,ATo"
+  },
+  "fourBet": {
+    "UTG_HJ": "AA,KK,AKs",
+    "UTG_CO": "AA,KK,AKs",
+    "UTG_BTN": "AA,KK,AKs",
+    "UTG_SB": "AA,KK,AKs",
+    "UTG_BB": "AA,KK,AKs",
+    "HJ_CO": "AA,KK,QQ,AKs,A5s,AKo",
+    "HJ_BTN": "AA,KK,QQ,AKs,A5s,AKo",
+    "HJ_SB": "AA,KK,QQ,AKs,A5s,AKo",
+    "HJ_BB": "AA,KK,QQ,AKs,A5s,AKo",
+    "CO_BTN": "AA,KK,QQ,JJ,AKs,AQs,A5s,A4s,AKo",
+    "CO_SB": "AA,KK,QQ,JJ,AKs,AQs,A5s,A4s,AKo",
+    "CO_BB": "AA,KK,QQ,JJ,AKs,AQs,A5s,A4s,AKo",
+    "BTN_SB": "AA,KK,QQ,JJ,TT,AKs,AQs,AJs,A5s,A4s,A3s,AKo,AQo",
+    "BTN_BB": "AA,KK,QQ,JJ,TT,AKs,AQs,AJs,A5s,A4s,A3s,AKo,AQo",
+    "SB_BB": "AA,KK,QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,A4s,A3s,A2s,KQs,AKo,AQo,AJo"
+  },
+  "squeeze": {
+    "CO_UTG": "AA,KK,QQ,JJ,AKs,AQs,A5s,AKo",
+    "CO_HJ": "AA,KK,QQ,JJ,TT,AKs,AQs,AJs,A5s,A4s,AKo,AQo",
+    "BTN_UTG": "AA,KK,QQ,JJ,AKs,AQs,A5s,A4s,AKo",
+    "BTN_HJ": "AA,KK,QQ,JJ,TT,AKs,AQs,AJs,A5s,A4s,KQs,AKo,AQo",
+    "BTN_CO": "AA,KK,QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,A4s,A3s,KQs,KJs,AKo,AQo,AJo",
+    "SB_UTG": "AA,KK,QQ,JJ,AKs,AQs,AJs,A5s,AKo",
+    "SB_HJ": "AA,KK,QQ,JJ,TT,AKs,AQs,AJs,ATs,A5s,A4s,KQs,AKo,AQo",
+    "SB_CO": "AA,KK,QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,A4s,A3s,KQs,KJs,QJs,AKo,AQo,AJo",
+    "SB_BTN": "AA,KK,QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A9s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,JTs,T9s,98s,AKo,AQo,AJo,ATo",
+    "BB_UTG": "AA,KK,QQ,JJ,TT,AKs,AQs,AJs,A5s,AKo,AQo",
+    "BB_HJ": "AA,KK,QQ,JJ,TT,99,AKs,AQs,AJs,ATs,A5s,A4s,KQs,AKo,AQo,AJo",
+    "BB_CO": "AA,KK,QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A5s,A4s,A3s,KQs,KJs,QJs,AKo,AQo,AJo,ATo",
+    "BB_BTN": "AA,KK,QQ,JJ,TT,99,88,77,AKs,AQs,AJs,ATs,A9s,A5s,A4s,A3s,A2s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,AKo,AQo,AJo,ATo,A9o",
+    "BB_SB": "",
+    "BB_CO_fromBTN": "AA,KK,QQ,JJ,TT,99,88,AKs,AQs,AJs,ATs,A5s,A4s,A3s,KQs,KJs,QJs,AKo,AQo,AJo,ATo"
+  },
+  "overcall": {
+    "CO_UTG": "TT,99,88,77,AQs,AJs,ATs,KQs,KJs,QJs,JTs,T9s,98s,87s,76s,AQo",
+    "CO_HJ": "TT,99,88,77,66,AQs,AJs,ATs,A9s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,AQo,AJo",
+    "BTN_UTG": "TT,99,88,77,66,AQs,AJs,ATs,A5s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s,65s,54s,AQo",
+    "BTN_HJ": "TT,99,88,77,66,55,AQs,AJs,ATs,A9s,A5s,A4s,KQs,KJs,KTs,QJs,QTs,JTs,J9s,T9s,98s,87s,76s,65s,54s,AQo,AJo",
+    "BTN_CO": "99,88,77,66,55,44,AQs,AJs,ATs,A9s,A5s,A4s,KQs,KJs,KTs,K9s,QJs,QTs,Q9s,JTs,J9s,T9s,T8s,98s,97s,87s,86s,76s,75s,65s,64s,54s,AJo,ATo",
+    "SB_UTG": "TT,99,88,77,AQs,AJs,ATs,KQs,KJs,QJs,JTs,T9s,98s,87s",
+    "SB_HJ": "TT,99,88,77,66,AQs,AJs,ATs,A9s,KQs,KJs,KTs,QJs,QTs,JTs,T9s,98s,87s,76s",
+    "SB_CO": "99,88,77,66,55,AQs,AJs,ATs,A9s,KQs,KJs,KTs,K9s,QJs,QTs,JTs,J9s,T9s,98s,87s,76s,65s",
+    "SB_BTN": "88,77,66,55,44,AJs,ATs,A9s,A8s,KQs,KJs,KTs,K9s,QJs,QTs,Q9s,JTs,J9s,T9s,T8s,98s,97s,87s,86s,76s,75s,65s,54s",
+    "BB_UTG": "TT,99,88,77,66,55,AQs,AJs,ATs,A9s,KQs,KJs,KTs,QJs,QTs,JTs,J9s,T9s,98s,87s,76s,65s,AQo",
+    "BB_HJ": "99,88,77,66,55,44,AQs,AJs,ATs,A9s,A8s,KQs,KJs,KTs,K9s,QJs,QTs,Q9s,JTs,J9s,T9s,T8s,98s,97s,87s,86s,76s,75s,65s,54s,AQo,AJo",
+    "BB_CO": "88,77,66,55,44,33,AJs,ATs,A9s,A8s,A7s,KQs,KJs,KTs,K9s,K8s,QJs,QTs,Q9s,Q8s,JTs,J9s,J8s,T9s,T8s,98s,97s,87s,86s,76s,75s,65s,64s,54s,AJo,ATo",
+    "BB_BTN": "77,66,55,44,33,22,ATs,A9s,A8s,A7s,A6s,KJs,KTs,K9s,K8s,K7s,QJs,QTs,Q9s,Q8s,JTs,J9s,J8s,T9s,T8s,T7s,98s,97s,96s,87s,86s,85s,76s,75s,74s,65s,64s,54s,53s,43s,ATo,A9o",
+    "BB_SB": "66,55,44,33,22,A9s,A8s,A7s,A6s,A5s,KTs,K9s,K8s,K7s,K6s,QTs,Q9s,Q8s,Q7s,JTs,J9s,J8s,J7s,T9s,T8s,T7s,98s,97s,96s,87s,86s,85s,76s,75s,74s,65s,64s,63s,54s,53s,43s"
   }
 }

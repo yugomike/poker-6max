@@ -8,6 +8,10 @@ import {
   getRFIRange,
   getCallRange,
   getThreeBetRange,
+  getCallVs3BetRange,
+  getFourBetRange,
+  getSqueezeRange,
+  getOvercallRange,
 } from '../lib/ranges/preflop'
 
 export type ActionType = 'fold' | 'call' | 'raise' | '3bet' | '4bet' | 'allin'
@@ -151,6 +155,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       const priorRaises = actions.filter(
         a => a.action === 'raise' || a.action === '3bet' || a.action === '4bet'
       )
+      const priorCalls = actions.filter(a => a.action === 'call')
 
       if (priorRaises.length === 0 && !isRaise) {
         // No prior raises and this isn't a raise - shouldn't happen in standard play
@@ -159,18 +164,40 @@ export const useGameStore = create<GameState>((set, get) => ({
         range = getRFIRange(action.position)
       } else {
         // There's been a raise already
+        const rfiAction = actions.find(a => a.action === 'raise')
+        const threeBetAction = actions.find(a => a.action === '3bet')
         const lastRaiseAction = [...actions].reverse().find(
           a => a.action === 'raise' || a.action === '3bet' || a.action === '4bet'
         )
 
         if (lastRaiseAction) {
           if (action.action === 'call') {
-            range = getCallRange(action.position, lastRaiseAction.position)
+            if (threeBetAction && rfiAction && action.position === rfiAction.position) {
+              // Opener calling a 3-bet
+              range = getCallVs3BetRange(action.position, threeBetAction.position)
+            } else if (priorCalls.length > 0 && rfiAction && lastRaiseAction.action === 'raise') {
+              // Calling after raise + call(s) = overcall
+              range = getOvercallRange(action.position, rfiAction.position)
+            } else {
+              // Standard call vs RFI
+              range = getCallRange(action.position, lastRaiseAction.position)
+            }
           } else if (action.action === '3bet') {
-            range = getThreeBetRange(action.position, lastRaiseAction.position)
+            if (priorCalls.length > 0 && rfiAction) {
+              // 3-bet with caller(s) in between = squeeze
+              range = getSqueezeRange(action.position, rfiAction.position)
+            } else {
+              // Standard 3-bet
+              range = getThreeBetRange(action.position, lastRaiseAction.position)
+            }
           } else if (action.action === '4bet') {
-            // For 4bet, we'd need 4bet ranges - for now use 3bet as approximation
-            range = getThreeBetRange(action.position, lastRaiseAction.position)
+            if (rfiAction && threeBetAction) {
+              // 4-bet by the opener vs the 3-bettor
+              range = getFourBetRange(rfiAction.position, threeBetAction.position)
+            } else if (threeBetAction) {
+              // Fallback: use the 3-bet action position
+              range = getFourBetRange(action.position, threeBetAction.position)
+            }
           } else if (action.action === 'raise') {
             // This shouldn't happen if there's already been a raise
             range = getRFIRange(action.position)
@@ -272,18 +299,37 @@ export const useGameStore = create<GameState>((set, get) => ({
         const priorRaises = priorActions.filter(
           a => a.action === 'raise' || a.action === '3bet' || a.action === '4bet'
         )
+        const priorCalls = priorActions.filter(a => a.action === 'call')
 
         if (priorRaises.length === 0 && action.action === 'raise') {
           range = getRFIRange(action.position)
         } else if (priorRaises.length > 0) {
+          const rfiAction = priorActions.find(a => a.action === 'raise')
+          const threeBetAction = priorActions.find(a => a.action === '3bet')
           const lastRaiseAction = [...priorActions].reverse().find(
             a => a.action === 'raise' || a.action === '3bet' || a.action === '4bet'
           )
           if (lastRaiseAction) {
             if (action.action === 'call') {
-              range = getCallRange(action.position, lastRaiseAction.position)
-            } else if (action.action === '3bet' || action.action === '4bet') {
-              range = getThreeBetRange(action.position, lastRaiseAction.position)
+              if (threeBetAction && rfiAction && action.position === rfiAction.position) {
+                range = getCallVs3BetRange(action.position, threeBetAction.position)
+              } else if (priorCalls.length > 0 && rfiAction && lastRaiseAction.action === 'raise') {
+                range = getOvercallRange(action.position, rfiAction.position)
+              } else {
+                range = getCallRange(action.position, lastRaiseAction.position)
+              }
+            } else if (action.action === '3bet') {
+              if (priorCalls.length > 0 && rfiAction) {
+                range = getSqueezeRange(action.position, rfiAction.position)
+              } else {
+                range = getThreeBetRange(action.position, lastRaiseAction.position)
+              }
+            } else if (action.action === '4bet') {
+              if (rfiAction && threeBetAction) {
+                range = getFourBetRange(rfiAction.position, threeBetAction.position)
+              } else if (threeBetAction) {
+                range = getFourBetRange(action.position, threeBetAction.position)
+              }
             }
           }
         }

@@ -13,4 +13,8 @@ export interface RangePack {
   rfi: Record<Position, string>
   callVsRfi: Record<string, string>
   threeBet: Record<string, string>
+  callVs3Bet: Record<string, string>
+  fourBet: Record<string, string>
+  squeeze: Record<string, string>
+  overcall: Record<string, string>
 }
