@@ -10,7 +10,7 @@ interface PlayerRangePanelProps {
 }
 
 export function PlayerRangePanel({ position }: PlayerRangePanelProps) {
-  const { players, board } = useGameStore()
+  const { players, board, heroHoleCards } = useGameStore()
   const player = players.get(position)
 
   if (!player) return null
@@ -44,6 +44,11 @@ export function PlayerRangePanel({ position }: PlayerRangePanelProps) {
   const shorthand = rangeToShorthand(range)
   const hasBoard = board.length >= 3
 
+  // Combine board cards and hero hole cards as blockers for opponent ranges
+  const blockers = heroHoleCards && !isHero
+    ? [...board, ...heroHoleCards]
+    : board
+
   return (
     <div className={`
       p-3 rounded-lg border
@@ -67,7 +72,7 @@ export function PlayerRangePanel({ position }: PlayerRangePanelProps) {
       {/* Distribution when board is available */}
       {hasBoard && (
         <div className="mt-3 pt-3 border-t border-gray-700">
-          <CompactDistribution range={range} board={board} />
+          <CompactDistribution range={range} board={blockers} />
         </div>
       )}
     </div>

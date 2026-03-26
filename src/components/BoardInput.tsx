@@ -7,7 +7,7 @@ import { CardDisplay, EmptyCardSlot } from './CardPicker'
 import { CardPickerModal } from './CardPickerModal'
 
 export function BoardInput() {
-  const { board, setBoard } = useGameStore()
+  const { board, setBoard, heroHoleCards } = useGameStore()
   const [showPicker, setShowPicker] = useState(false)
 
   const handleSelectCard = (card: Card) => {
@@ -95,7 +95,7 @@ export function BoardInput() {
           title={getPickerTitle()}
           onSelect={handleSelectCard}
           onClose={() => setShowPicker(false)}
-          blockedCards={board}
+          blockedCards={heroHoleCards ? [...board, ...heroHoleCards] : board}
         />
       )}
 

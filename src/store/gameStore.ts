@@ -35,6 +35,7 @@ export type Street = 'preflop' | 'flop' | 'turn' | 'river'
 interface GameState {
   // Hand setup
   heroPosition: Position | null
+  heroHoleCards: [Card, Card] | null
   players: Map<Position, PlayerState>
 
   // Action tracking
@@ -48,6 +49,7 @@ interface GameState {
 
   // Actions
   setHeroPosition: (position: Position) => void
+  setHeroHoleCards: (cards: [Card, Card] | null) => void
   resetHand: () => void
   addAction: (action: PlayerAction) => void
   undoLastAction: () => void
@@ -83,6 +85,7 @@ function initializePlayers(heroPosition: Position | null): Map<Position, PlayerS
 
 export const useGameStore = create<GameState>((set, get) => ({
   heroPosition: null,
+  heroHoleCards: null,
   players: initializePlayers(null),
   actions: [],
   currentStreet: 'preflop',
@@ -93,6 +96,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   setHeroPosition: (position) => {
     set({
       heroPosition: position,
+      heroHoleCards: null,
       players: initializePlayers(position),
       actions: [],
       currentStreet: 'preflop',
@@ -102,9 +106,14 @@ export const useGameStore = create<GameState>((set, get) => ({
     })
   },
 
+  setHeroHoleCards: (cards) => {
+    set({ heroHoleCards: cards })
+  },
+
   resetHand: () => {
     const heroPosition = get().heroPosition
     set({
+      heroHoleCards: null,
       players: initializePlayers(heroPosition),
       actions: [],
       currentStreet: 'preflop',
