@@ -26,30 +26,23 @@ export function ActionHistory() {
 
   if (actions.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500 text-sm">
+      <div className="px-3 py-2 text-center text-gray-500 text-xs">
         No actions yet
       </div>
     )
   }
 
   return (
-    <div className="p-4">
-      <h3 className="text-sm font-medium text-gray-400 mb-2">Preflop Action</h3>
-      <div className="flex flex-wrap gap-1">
+    <div className="px-3 py-2">
+      <h3 className="text-xs font-medium text-gray-500 mb-1">Preflop</h3>
+      <div className="space-y-0.5">
         {actions.map((action, idx) => (
-          <span
-            key={idx}
-            className={`
-              inline-flex items-center gap-1
-              px-2 py-1 rounded
-              bg-gray-800 text-sm
-            `}
-          >
-            <span className="font-medium text-white">{action.position}</span>
+          <div key={idx} className="flex items-center gap-2 text-sm">
+            <span className="font-medium text-white w-8">{action.position}</span>
             <span className={ACTION_COLORS[action.action]}>
               {ACTION_LABELS[action.action]}
             </span>
-          </span>
+          </div>
         ))}
       </div>
     </div>
