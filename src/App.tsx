@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useGameStore } from './store/gameStore'
 import { Table } from './components/Table'
 import { PositionSelector } from './components/PositionSelector'
@@ -7,9 +8,24 @@ import { ActivePlayersRanges } from './components/PlayerRangePanel'
 import { BoardInput } from './components/BoardInput'
 import { SaveHandButton } from './components/SaveHandButton'
 import { HandHistory } from './components/HandHistory'
+import { RangeVisualizer } from './components/RangeVisualizer'
+import { createEmptyRange, parseRangeString } from './lib/poker/range'
+import type { Range } from './lib/poker/range'
+import { parseCard } from './lib/poker/cards'
 
 function App() {
   const { heroPosition, actingPosition, board } = useGameStore()
+
+  // Test state for RangeVisualizer demo
+  const [showDemo, setShowDemo] = useState(false)
+  const [demoRange, setDemoRange] = useState<Range>(() =>
+    parseRangeString('AA,KK,QQ,JJ,TT,AKs,AQs,AJs,AKo,KQs')
+  )
+  const [demoBlockers] = useState(() => [
+    parseCard('As')!,
+    parseCard('Kh')!,
+    parseCard('Qd')!,
+  ])
 
   const isPreflopComplete = actingPosition === null
   const hasBoard = board.length >= 3
@@ -127,6 +143,38 @@ function App() {
           </div>
         )}
       </main>
+
+      {/* RangeVisualizer Demo Section */}
+      <section className="max-w-6xl mx-auto p-4">
+        <button
+          onClick={() => setShowDemo(!showDemo)}
+          className="text-sm text-blue-400 hover:text-blue-300 mb-4"
+        >
+          {showDemo ? 'Hide' : 'Show'} RangeVisualizer Demo
+        </button>
+
+        {showDemo && (
+          <div className="bg-gray-800 rounded-xl p-6 space-y-4">
+            <h2 className="text-lg font-medium">RangeVisualizer Demo</h2>
+            <p className="text-sm text-gray-400">Board: A♠ K♥ Q♦ — Drag to select/deselect hands</p>
+
+            <RangeVisualizer
+              range={demoRange}
+              onChange={setDemoRange}
+              blockers={demoBlockers}
+              size="lg"
+              showComboCount
+            />
+
+            <button
+              onClick={() => setDemoRange(createEmptyRange())}
+              className="px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded text-sm"
+            >
+              Clear Range
+            </button>
+          </div>
+        )}
+      </section>
 
       {/* Footer */}
       <footer className="border-t border-gray-800 p-4 mt-8">

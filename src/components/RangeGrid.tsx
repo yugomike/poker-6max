@@ -26,7 +26,10 @@ export function RangeGrid({
 
   return (
     <div className="inline-block bg-gray-800 p-1 rounded">
-      <div className="grid grid-cols-13 gap-px">
+      <div
+        className="grid gap-px"
+        style={{ gridTemplateColumns: 'repeat(13, minmax(0, 1fr))' }}
+      >
         {Array.from({ length: 13 }).map((_, row) =>
           Array.from({ length: 13 }).map((_, col) => {
             const ht = getHandTypeFromPosition(row, col)
